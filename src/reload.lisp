@@ -32,7 +32,8 @@
   ;; (missing TLSv1_[1,2]_XXX methods,
   ;; see https://github.com/cl-plus-ssl/cl-plus-ssl/issues/56)
   ;; so first try to load possible custom installations of libssl
-  (:darwin (:or "/opt/local/lib/libssl.dylib" ;; MacPorts
+  (:darwin (:or "/usr/local/opt/openssl/lib/libssl.dylib" ;; essential if you installed openssl with modern Homebrew
+            "/opt/local/lib/libssl.dylib" ;; MacPorts
                 "/sw/lib/libssl.dylib"        ;; Fink
                 "/usr/local/lib/libssl.dylib" ;; Homebrew and personalized install
                 "libssl.dylib"                ;; default system libssl, which may have insufficient crypto
