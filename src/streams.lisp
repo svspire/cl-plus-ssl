@@ -327,7 +327,7 @@ MAKE-CONTEXT also allows to enab/disable verification."
 (defun maybe-verify-client-stream (ssl-stream verify-mode hostname)
   ;; VERIFY-MODE is one of NIL, :OPTIONAL, :REQUIRED
   ;; HOSTNAME is either NIL or a string.
-  (when #+DARWIN-TARGET nil #-DARWIN-TARGET verify-mode ; never attempt to verify on MacOS. It always crashes.
+  (when verify-mode
     (let* ((handle (ssl-stream-handle ssl-stream))
            (srv-cert (ssl-get-peer-certificate handle)))
       (unwind-protect
@@ -367,7 +367,8 @@ MAKE-CONTEXT also allows to enab/disable verification."
          ,@body))))
 
 (defvar *make-ssl-client-stream-verify-default*
-  (if (member :windows *features*) ; by trivial-features
+  (if (or (member :windows *features*) ; by trivial-features
+          (member :darwin *features*))  ;  Macos cannot handle verification either
       ;; On Windows we can't yet initizlise context with
       ;; trusted certifying authorities from system configuration.
       ;; ssl-ctx-set-default-verify-paths only helps
