@@ -41,9 +41,9 @@
                  #+(and windows x86) "libcrypto-1_1.dll"
                  "libeay32.dll"))
   (:openbsd "libcrypto.so")
-  (:darwin (:or "/opt/local/lib/libcrypto.dylib" ;; MacPorts
+  (:darwin (:or "/usr/local/opt/openssl/lib/libcrypto.dylib" ;; Homebrew
+                "/opt/local/lib/libcrypto.dylib" ;; MacPorts
                 "/sw/lib/libcrypto.dylib"        ;; Fink
-                "/usr/local/opt/openssl/lib/libcrypto.dylib" ;; Homebrew
                 "/usr/local/lib/libcrypto.dylib" ;; personalized install
                 "libcrypto.dylib"                ;; default system libcrypto, which may have insufficient crypto
                 "/usr/lib/libcrypto.dylib"))
@@ -61,7 +61,7 @@
   (:darwin (:or "/usr/local/opt/openssl/lib/libssl.dylib" ;; essential if you installed openssl with modern Homebrew
             "/opt/local/lib/libssl.dylib" ;; MacPorts
                 "/sw/lib/libssl.dylib"        ;; Fink
-                "/usr/local/opt/openssl/lib/libssl.dylib" ;; Homebrew
+                ;"/usr/local/opt/openssl/lib/libssl.dylib" ;; Homebrew
                 "/usr/local/lib/libssl.dylib" ;; personalized install
                 "libssl.dylib"                ;; default system libssl, which may have insufficient crypto
                 "/usr/lib/libssl.dylib"))

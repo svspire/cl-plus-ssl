@@ -327,7 +327,7 @@ MAKE-CONTEXT also allows to enab/disable verification."
 (defun maybe-verify-client-stream (ssl-stream verify-mode hostname)
   ;; VERIFY-MODE is one of NIL, :OPTIONAL, :REQUIRED
   ;; HOSTNAME is either NIL or a string.
-  (when verify-mode
+  (when #+DARWIN-TARGET nil #-DARWIN-TARGET verify-mode ; never attempt to verify on MacOS. It always crashes.
     (let* ((handle (ssl-stream-handle ssl-stream))
            (srv-cert (ssl-get-peer-certificate handle)))
       (unwind-protect
